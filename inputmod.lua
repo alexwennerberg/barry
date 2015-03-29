@@ -16,6 +16,7 @@ function button(name, spacing, num) -- presses button and prints input
   until n == 0
 end
 function rightof(adirection)
+  --returns a direction right of a given direction
   if adirection == "up" then
     return "right"
   elseif adirection == "left" then
@@ -30,6 +31,7 @@ function menuitem()
   return memory.readbyte(0xCC26)
 end
 function leftof(adirection)
+  --returns a direction right of a given direction
   if adirection == "up" then
     return "left"
   elseif adirection == "left" then
@@ -40,8 +42,8 @@ function leftof(adirection)
     return "up"
   end
 end
-
-function checkitem(itemnum) -- takes an item number and tells u if u have it and where
+function checkitem(itemnum) 
+  -- takes an item number and tells u if u have it and where
   local j=-1
   for i=0xD31E,0xD344,2 do    
     j=j+1
@@ -53,6 +55,7 @@ function checkitem(itemnum) -- takes an item number and tells u if u have it and
 end
 
 function switchtofirst(num)
+  --switches a pokemon at the given position to the first position
   openpkmn_start()
   movement.skipframes(50)
   while inputmod.menuitem() ~= (num-1) do
@@ -71,6 +74,7 @@ end
     inputmod.button("B", 20, 7)
 end
 function openpkmn_start()
+  --opens the pokemon screen from the start menu
   inputmod.button("start")
   inputmod.button("start")
   inputmod.button("start")

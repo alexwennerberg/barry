@@ -10,6 +10,7 @@ function resetcords() -- resets coords to current coords
     y = memory.readbyte(0xD361)
   end
 function flip(toflipme)
+  --returns the opposit of a given direction
   if toflipme == "up" then
     return "down"
   elseif toflipme == "down" then
@@ -21,6 +22,7 @@ function flip(toflipme)
   end
   end
 function skipframes(frames)
+  --pauses the program for frames frames
 j = vba.framecount();
 i = 0;
 while i<frames do
@@ -29,7 +31,8 @@ while i<frames do
 end
   end
 
-function directionfacing() -- returns the direction you're facing
+function directionfacing() 
+-- returns the direction you're facing
 if memory.readbyte(0xD52A) == 8 then 
 return "up"
 elseif memory.readbyte(0xD52A) == 1 then 
@@ -42,6 +45,7 @@ end
 end
 
 function tonum(adirection)
+--converts a direction to a number
 if adirection == "left" then
 return 1
 elseif adirection == "right" then
@@ -53,6 +57,8 @@ elseif adirection == "down" then
   end
 end
 function menuopen()
+--returns a boolean representative of whether a 
+--menu is open
   if memory.readbyte(0xCFC4) == 1 then
     return true
   else return false
@@ -60,6 +66,7 @@ end
 end
 
 function initialize()
+  --initializes a bunch of constants
   path = {}
   finishedbattle = false
   savex = 0
@@ -82,12 +89,15 @@ function initialize()
   resetcords()
 end
 function resetarea()
+  --reset area
 area = currlocation()
 end
 function currlocation() 
+  --return current location from memory
     return memory.readbyte(0xD35E) 
 end
 function walkto(xcord, ycord, paradigm) 
+  --walk to a given xcord and ycord using a movement paradigm
   while not (x == xcord and y == ycord) and not changedareas() do
     print(x, y)
     if paradigm == "RHR" then RHR() else
@@ -151,6 +161,7 @@ function playto(anarea, ax, ay)
     end
 end
 function findpath(begin, ennd, path)
+  --node path algorithm
   table.insert(path, begin)
   print(path)
   if begin == ennd then
